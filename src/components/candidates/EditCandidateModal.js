@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import './App.css'
+import CloseIcon from '@mui/icons-material/Close';
+
 
 function EditCandidateModal({ Data, handleClose, setStatus, setRecenteditFormData }) {
     const [message, setMessage] = useState('');
+    const api_url = process.env.REACT_APP_API_URL
     const [formData, setFormData] = useState({
-        candidate_id: '',
+
         candidate_name: '',
         candidate_email: '',
         candidate_phone: '',
@@ -12,7 +16,7 @@ function EditCandidateModal({ Data, handleClose, setStatus, setRecenteditFormDat
     useEffect(() => {
         if (Data) {
             setFormData({
-                candidate_id: Data.candidate_id,
+
                 candidate_name: Data.candidate_name,
                 candidate_email: Data.candidate_email,
                 candidate_phone: Data.candidate_phon,
@@ -34,7 +38,7 @@ function EditCandidateModal({ Data, handleClose, setStatus, setRecenteditFormDat
     };
 
     const sendDataToServer = async (formData) => {
-        const res = await fetch('http://127.0.0.1:5000/updatecandidate', {
+        const res = await fetch(`${api_url}/updatecandidate`, {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(formData)
@@ -58,20 +62,11 @@ function EditCandidateModal({ Data, handleClose, setStatus, setRecenteditFormDat
     return (
         <div className='modal-overlay'>
             <div className='modal-content'>
-                <div className='flex justify-end'><button onClick={handleClose}>close</button></div>
+                <div className='flex justify-end'><button onClick={handleClose}><CloseIcon /></button></div>
                 <h2 className='text-center text-xl mb-2'> Edit Candidate </h2>
                 <form className='flex flex-col gap-2' onSubmit={handleSubmit}>
-                    <div>
-                        <label>id:</label>
-                        <input
-                            type='text'
-                            name='candidate_id'
-                            placeholder='candidate id'
-                            onChange={handleChange}
-                            value={formData.candidate_id}
-                        />
-                    </div>
-                    <div>
+
+                    <div className='flex flex-col'>
                         <label>name:</label>
                         <input
                             type='text'
@@ -81,8 +76,8 @@ function EditCandidateModal({ Data, handleClose, setStatus, setRecenteditFormDat
                             value={formData.candidate_name}
                         />
                     </div>
-                    <div>
-                        <label>email:</label>
+                    <div className='flex flex-col'>
+                        <label >email:</label>
                         <input
                             type='email'
                             name='candidate_email'
@@ -91,7 +86,7 @@ function EditCandidateModal({ Data, handleClose, setStatus, setRecenteditFormDat
                             value={formData.candidate_email}
                         />
                     </div>
-                    <div>
+                    <div className='flex flex-col'>
                         <label>phone no:</label>
                         <input
                             type='text'

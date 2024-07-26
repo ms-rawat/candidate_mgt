@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
+import CloseIcon from '@mui/icons-material/Close';
 function EditSkillModal({ Data, handleClose, setStatus, setRecenteditFormData }) {
     const [message, setMessage] = useState('');
+    const api_url = process.env.REACT_APP_API_URL
     const [formData, setFormData] = useState({
-        jobrole_id: '',
+
         jobrole_name: '',
         jobrole_description: '',
 
@@ -12,7 +14,7 @@ function EditSkillModal({ Data, handleClose, setStatus, setRecenteditFormData })
     useEffect(() => {
         if (Data) {
             setFormData({
-                jobrole_id: Data.jobrole_id,
+
                 jobrole_name: Data.jobrole_name,
                 jobrole_description: Data.jobrole_description,
 
@@ -34,7 +36,7 @@ function EditSkillModal({ Data, handleClose, setStatus, setRecenteditFormData })
     };
 
     const sendDataToServer = async (formData) => {
-        const res = await fetch('http://127.0.0.1:5000/updatejobrole', {
+        const res = await fetch(`${api_url}/updatejobrole`, {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(formData)
@@ -58,20 +60,11 @@ function EditSkillModal({ Data, handleClose, setStatus, setRecenteditFormData })
     return (
         <div className='modal-overlay'>
             <div className='modal-content'>
-                <div className='flex justify-end'><button onClick={handleClose}>close</button></div>
+                <div className='flex justify-end'><button onClick={handleClose}><CloseIcon /></button></div>
                 <h2 className='text-center text-xl mb-2'> Edit jobrole </h2>
                 <form className='flex flex-col gap-2' onSubmit={handleSubmit}>
-                    <div>
-                        <label>id:</label>
-                        <input
-                            type='text'
-                            name='jobrole_id'
-                            placeholder='jobrole id'
-                            onChange={handleChange}
-                            value={formData.jobrole_id}
-                        />
-                    </div>
-                    <div>
+
+                    <div className='flex flex-col'>
                         <label>name:</label>
                         <input
                             type='text'
@@ -81,7 +74,7 @@ function EditSkillModal({ Data, handleClose, setStatus, setRecenteditFormData })
                             value={formData.jobrole_name}
                         />
                     </div>
-                    <div>
+                    <div className='flex flex-col'>
                         <label>desc:</label>
                         <input
                             type='text'

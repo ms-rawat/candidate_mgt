@@ -10,6 +10,8 @@ import Competency from './components/competency/Competency';
 import JobRole from './components/jobrole/JobRole';
 import CompetencySkills from './components/competencySkills/CompetencySkills';
 import Header from './components/navigation/Header';
+import Jobrolecompetency from './components/jobrolecompetency/Jobrolecompetency';
+import Questionsetter from './components/question/Questionsetter';
 
 
 function App() {
@@ -34,6 +36,14 @@ function App() {
       path: 'comp_skills',
       element: <CompetencySkills />
     },
+    {
+      path: 'jobrole_competency',
+      element: <Jobrolecompetency />
+    },
+    {
+      path: 'questionsetter',
+      element: <Questionsetter />
+    }
   ])
 
   return (

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-
+import CloseIcon from '@mui/icons-material/Close';
 function EditSkillModal({ Data, handleClose, setStatus, setRecenteditFormData }) {
     const [message, setMessage] = useState('');
+    const api_url = process.env.REACT_APP_API_URL
     const [formData, setFormData] = useState({
-        skill_id: '',
+
         skill_name: '',
         skill_description: '',
 
@@ -12,7 +13,7 @@ function EditSkillModal({ Data, handleClose, setStatus, setRecenteditFormData })
     useEffect(() => {
         if (Data) {
             setFormData({
-                skill_id: Data.skill_id,
+
                 skill_name: Data.skill_name,
                 skill_description: Data.skill_description,
 
@@ -34,7 +35,7 @@ function EditSkillModal({ Data, handleClose, setStatus, setRecenteditFormData })
     };
 
     const sendDataToServer = async (formData) => {
-        const res = await fetch('http://127.0.0.1:5000/updateskill', {
+        const res = await fetch(`${api_url}/updateskill`, {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(formData)
@@ -58,20 +59,11 @@ function EditSkillModal({ Data, handleClose, setStatus, setRecenteditFormData })
     return (
         <div className='modal-overlay'>
             <div className='modal-content'>
-                <div className='flex justify-end'><button onClick={handleClose}>close</button></div>
-                <h2 className='text-center text-xl mb-2'> Edit Candidate </h2>
+                <div className='flex justify-end'><button onClick={handleClose}><CloseIcon /></button></div>
+                <h2 className='text-center text-xl mb-2'> Edit skill </h2>
                 <form className='flex flex-col gap-2' onSubmit={handleSubmit}>
-                    <div>
-                        <label>id:</label>
-                        <input
-                            type='text'
-                            name='skill_id'
-                            placeholder='skill id'
-                            onChange={handleChange}
-                            value={formData.skill_id}
-                        />
-                    </div>
-                    <div>
+
+                    <div className='flex flex-col'>
                         <label>name:</label>
                         <input
                             type='text'
@@ -81,7 +73,7 @@ function EditSkillModal({ Data, handleClose, setStatus, setRecenteditFormData })
                             value={formData.skill_name}
                         />
                     </div>
-                    <div>
+                    <div className='flex flex-col'>
                         <label>desc:</label>
                         <input
                             type='text'

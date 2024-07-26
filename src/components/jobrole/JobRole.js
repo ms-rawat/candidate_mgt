@@ -6,6 +6,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
+import { Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 function JobRole() {
     const [jobrole, setjobroleData] = useState([]);
     const [open, setopen] = useState(false);
@@ -17,12 +19,13 @@ function JobRole() {
     const [filteredData, setfilteredData] = useState([]);
     const [editOpen, setEditOpen] = useState(false);
     const [currentCandidate, setcurrentCandidate] = useState(null);
+    const api_url = process.env.REACT_APP_API_URL
+    const navigate = useNavigate()
 
 
     useEffect(() => {
         if (insertionStatus) {
-            setjobroleData([...jobrole, recentData]);
-            setfilteredData([...jobrole, recentData]);
+            getjobroleDetails()
             setInsertionStatus(false);
         }
     }, [insertionStatus, recentData, jobrole]);
@@ -35,8 +38,8 @@ function JobRole() {
     }
     const handleEditClose = () => { setEditOpen(false); setcurrentCandidate(null); }
 
-    const getSkillDetails = async () => {
-        let result = await fetch('http://127.0.0.1:5000/jobrole', {
+    const getjobroleDetails = async () => {
+        let result = await fetch(`${api_url}/jobrole`, {
             method: 'GET',
             headers: { "Content-Type": "application/json" },
         });
@@ -48,12 +51,12 @@ function JobRole() {
     }
 
     useEffect(() => {
-        getSkillDetails();
+        getjobroleDetails();
     }, []);
 
     const handleDelete = async (id) => {
         console.log(id);
-        const res = await fetch(`http://127.0.0.1:5000/deletejobrole/${id}`, {
+        const res = await fetch(`${api_url}/deletejobrole/${id}`, {
             method: 'DELETE',
             headers: { 'Content-Type': "application/json" },
         });
@@ -82,10 +85,16 @@ function JobRole() {
     useEffect(() => {
         console.log("change")
         if (editStatus) {
-            getSkillDetails()
+            getjobroleDetails()
             setEditStatus(false)
         }
     }, [editStatus]);
+
+    const Openjobrolecompetency = (currentjobrole) => {
+        navigate('/jobrole_competency', { state: { currentjobrole, jobrole } })
+
+
+    }
 
     return (
         <div className="container mx-auto py-8">
@@ -137,10 +146,13 @@ function JobRole() {
                                     </button>
                                     <button
                                         onClick={() => handleEditOpen(jobrole, index)}
-                                        className="b text-gray-800 p-1 border-none rounded-lg"
+                                        className=" text-bg-gray-800 border-none  p-1 rounded-lg mr-2"
                                     >
                                         <EditIcon />
                                     </button>
+                                    <Button variant='contained'
+                                        onClick={() => Openjobrolecompetency(jobrole)}
+                                    >manage competency</Button>
                                 </td>
                             </tr>
                         ))}

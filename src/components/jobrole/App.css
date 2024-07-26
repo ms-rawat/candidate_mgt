@@ -3,9 +3,11 @@ button{
   padding: 2px;
 }
 input{
-  padding: 2px;
+  
+  border: 1px solid gray ;
+  border-radius: 5px;
+  padding: 7px;
 }
-
 .modal-overlay {
   position: fixed;
   top: 0;

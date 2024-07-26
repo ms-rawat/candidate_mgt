@@ -7,6 +7,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
 import { useNavigate } from 'react-router-dom';
+import { Button } from '@mui/material';
 function Competency() {
     const [competency, setcompetencyData] = useState([]);
     const [open, setopen] = useState(false);
@@ -19,11 +20,11 @@ function Competency() {
     const [editOpen, setEditOpen] = useState(false);
     const [currentCandidate, setcurrentCandidate] = useState(null);
     const navigate = useNavigate();
+    const api_url = process.env.REACT_APP_API_URL
 
     useEffect(() => {
         if (insertionStatus) {
-            setcompetencyData([...competency, recentData]);
-            setfilteredData([...competency, recentData]);
+            getcompetencyDetails()
             setInsertionStatus(false);
         }
     }, [insertionStatus, recentData, competency]);
@@ -37,7 +38,7 @@ function Competency() {
     const handleEditClose = () => { setEditOpen(false); setcurrentCandidate(null); }
 
     const getcompetencyDetails = async () => {
-        let result = await fetch('http://127.0.0.1:5000/competency', {
+        let result = await fetch(`${api_url}/competency`, {
             method: 'GET',
             headers: { "Content-Type": "application/json" },
         });
@@ -54,7 +55,7 @@ function Competency() {
 
     const handleDelete = async (id) => {
         console.log(id);
-        const res = await fetch(`http://127.0.0.1:5000/deletecompetency/${id}`, {
+        const res = await fetch(`${api_url}/deletecompetency/${id}`, {
             method: 'DELETE',
             headers: { 'Content-Type': "application/json" },
         });
@@ -88,8 +89,8 @@ function Competency() {
         }
     }, [editStatus]);
 
-    const OpenCompetencyskills = (competency) => {
-        navigate('/comp_skills', { state: { competency } })
+    const OpenCompetencyskills = (currentCompetency) => {
+        navigate('/comp_skills', { state: { currentCompetency, competency } })
     }
 
     return (
@@ -146,12 +147,12 @@ function Competency() {
                                         >
                                             <EditIcon />
                                         </button>
-                                        <button
+                                        <Button
                                             onClick={() => OpenCompetencyskills(competency)}
-                                            className="bg-yellow-200 text-gray-700 p-1 rounded-lg"
+                                            variant='contained'
                                         >
                                             manage skills
-                                        </button>
+                                        </Button>
                                     </div>
                                 </td>
                             </tr>

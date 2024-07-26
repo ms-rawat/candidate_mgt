@@ -6,6 +6,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
+
 function Candidates() {
     const [candidateData, setCandidateData] = useState([]);
     const [open, setopen] = useState(false);
@@ -19,12 +20,12 @@ function Candidates() {
     const [currentCandidate, setcurrentCandidate] = useState(null);
 
 
-    let indexOfarrayforedit;
+
+    const api_url = process.env.REACT_APP_API_URL
 
     useEffect(() => {
         if (insertionStatus) {
-            setCandidateData([...candidateData, recentData]);
-            setfilteredData([...candidateData, recentData]);
+            getCandidatesDetails()
             setInsertionStatus(false);
         }
     }, [insertionStatus, recentData, candidateData]);
@@ -33,12 +34,12 @@ function Candidates() {
     const handleclose = () => { setopen(false); console.log("closed"); }
     const handleEditOpen = (candidate, index) => {
         setcurrentCandidate(candidate); setEditOpen(true);
-        indexOfarrayforedit = index;
+
     }
     const handleEditClose = () => { setEditOpen(false); setcurrentCandidate(null); }
 
     const getCandidatesDetails = async () => {
-        let result = await fetch('http://127.0.0.1:5000/candidates', {
+        let result = await fetch(`${api_url}/candidates`, {
             method: 'GET',
             headers: { "Content-Type": "application/json" },
         });
@@ -54,7 +55,7 @@ function Candidates() {
 
     const handleDelete = async (id) => {
         console.log(id);
-        const res = await fetch(`http://127.0.0.1:5000/deletecandidate/${id}`, {
+        const res = await fetch(`${api_url}/deletecandidate/${id}`, {
             method: 'DELETE',
             headers: { 'Content-Type': "application/json" },
         });
@@ -136,6 +137,7 @@ function Candidates() {
                                     >
                                         <DeleteIcon />
                                     </button>
+
                                     <button
                                         onClick={() => handleEditOpen(candidate, index)}
                                         className="text-bg-gray-800 border-none  p-1 rounded-lg mr-2"

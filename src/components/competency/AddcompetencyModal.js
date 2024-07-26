@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import './App.css'
-
+import CloseIcon from '@mui/icons-material/Close';
 function AddCandidateModal({ handleclose, setStatus, setRecentformData }) {
     const [message, setmessage] = useState('')
+    const api_url = process.env.REACT_APP_API_URL
     const [formData, setFormData] = useState({
 
-        competency_id: '',
+
         competency_name: '',
         competency_description: '',
 
@@ -28,7 +29,7 @@ function AddCandidateModal({ handleclose, setStatus, setRecentformData }) {
     }
 
     const sendDataToserver = async (formData) => {
-        const res = await fetch('http://127.0.0.1:5000/addcompetency', {
+        const res = await fetch(`${api_url}/addcompetency`, {
             method: 'post',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(formData)
@@ -57,13 +58,12 @@ function AddCandidateModal({ handleclose, setStatus, setRecentformData }) {
     return (
         <div className='modal-overlay'>
             <div className='modal-content '>
-                <div className='flex justify-end'><button onClick={handleclose}>close</button></div>
+                <div className='flex justify-end'><button onClick={handleclose}><CloseIcon /></button></div>
                 <h2 className='text-center text-xl mb-2'> Add Competency </h2>
                 <form className=' flex flex-col gap-2' onSubmit={handlesubmit}>
-                    <div><label>id:</label> <input type='text' name='competency_id' placeholder='competency id' onChange={handleChange} value={formData.competency_id} /></div>
 
-                    <div><label>name:</label> <input type='text' name='competency_name' placeholder='competency name' onChange={handleChange} value={formData.competency_name} /></div>
-                    <div><label>desc:</label> <input type='text' name='competency_description' placeholder='competency description' onChange={handleChange} value={formData.competency_desc} /></div>
+                    <div className='flex flex-col'><label>name:</label> <input type='text' name='competency_name' placeholder='competency name' onChange={handleChange} value={formData.competency_name} /></div>
+                    <div className='flex flex-col'><label>desc:</label> <input type='text' name='competency_description' placeholder='competency description' onChange={handleChange} value={formData.competency_desc} /></div>
                     <div className='text-yellow-300'>{message}</div>
                     <button type='submit'>Add competency</button>
                 </form>

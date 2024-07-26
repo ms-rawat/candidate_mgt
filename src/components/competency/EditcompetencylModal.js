@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-
+import CloseIcon from '@mui/icons-material/Close';
 function EditcompetencyModal({ Data, handleClose, setStatus, setRecenteditFormData }) {
     const [message, setMessage] = useState('');
+    const api_url = process.env.REACT_APP_API_URL
     const [formData, setFormData] = useState({
-        competency_id: '',
+
         competency_name: '',
         competency_description: '',
 
@@ -12,7 +13,7 @@ function EditcompetencyModal({ Data, handleClose, setStatus, setRecenteditFormDa
     useEffect(() => {
         if (Data) {
             setFormData({
-                competency_id: Data.competency_id,
+
                 competency_name: Data.competency_name,
                 competency_description: Data.competency_description,
 
@@ -34,7 +35,7 @@ function EditcompetencyModal({ Data, handleClose, setStatus, setRecenteditFormDa
     };
 
     const sendDataToServer = async (formData) => {
-        const res = await fetch('http://127.0.0.1:5000/updatecompetency', {
+        const res = await fetch(`${api_url}/updatecompetency`, {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(formData)
@@ -58,20 +59,11 @@ function EditcompetencyModal({ Data, handleClose, setStatus, setRecenteditFormDa
     return (
         <div className='modal-overlay'>
             <div className='modal-content'>
-                <div className='flex justify-end'><button onClick={handleClose}>close</button></div>
+                <div className='flex justify-end'><button onClick={handleClose}><CloseIcon /></button></div>
                 <h2 className='text-center text-xl mb-2'> Edit Candidate </h2>
                 <form className='flex flex-col gap-2' onSubmit={handleSubmit}>
-                    <div>
-                        <label>id:</label>
-                        <input
-                            type='text'
-                            name='competency_id'
-                            placeholder='competency id'
-                            onChange={handleChange}
-                            value={formData.competency_id}
-                        />
-                    </div>
-                    <div>
+
+                    <div className='flex flex-col'>
                         <label>name:</label>
                         <input
                             type='text'
@@ -81,7 +73,7 @@ function EditcompetencyModal({ Data, handleClose, setStatus, setRecenteditFormDa
                             value={formData.competency_name}
                         />
                     </div>
-                    <div>
+                    <div className='flex flex-col'>
                         <label>desc:</label>
                         <input
                             type='text'

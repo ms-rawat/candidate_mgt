@@ -1,7 +1,7 @@
 import { Box, Button, Divider, Drawer, List, ListItem, ListItemButton, ListItemText } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import MenuIcon from '@mui/icons-material/Menu';
 function Header() {
     const [open, setOpen] = React.useState(false);
 
@@ -38,7 +38,7 @@ function Header() {
                 <h1 className='text-2xl text-center p-2'>TalentMatrix</h1>
             </div>
             <div className='bg-gray-100'>
-                <Button onClick={toggleDrawer(true)}>Menu</Button>
+                <Button onClick={toggleDrawer(true)}><MenuIcon /></Button>
                 <Drawer open={open} onClose={toggleDrawer(false)}>
                     {DrawerList}
                 </Drawer>

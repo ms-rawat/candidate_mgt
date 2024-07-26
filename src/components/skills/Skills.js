@@ -17,12 +17,11 @@ function Skills() {
     const [filteredData, setfilteredData] = useState([]);
     const [editOpen, setEditOpen] = useState(false);
     const [currentCandidate, setcurrentCandidate] = useState(null);
-
+    const api_url = process.env.REACT_APP_API_URL
 
     useEffect(() => {
         if (insertionStatus) {
-            setSkillsData([...skills, recentData]);
-            setfilteredData([...skills, recentData]);
+            getSkillDetails()
             setInsertionStatus(false);
         }
     }, [insertionStatus, recentData, skills]);
@@ -36,7 +35,7 @@ function Skills() {
     const handleEditClose = () => { setEditOpen(false); setcurrentCandidate(null); }
 
     const getSkillDetails = async () => {
-        let result = await fetch('http://127.0.0.1:5000/skills', {
+        let result = await fetch(`${api_url}/skills`, {
             method: 'GET',
             headers: { "Content-Type": "application/json" },
         });
@@ -53,7 +52,7 @@ function Skills() {
 
     const handleDelete = async (id) => {
         console.log(id);
-        const res = await fetch(`http://127.0.0.1:5000/deleteskill/${id}`, {
+        const res = await fetch(`${api_url}/deleteskill/${id}`, {
             method: 'DELETE',
             headers: { 'Content-Type': "application/json" },
         });

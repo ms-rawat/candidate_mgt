@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
+import { Button } from '@mui/material';
 
 export default function AutoCompleteSkills({ onSkillSelect }) {
     const [skills, setSkillsData] = useState([]);
-
+    const [currentskill, setcurrentskill] = useState([])
+    const api_url = process.env.REACT_APP_API_URL
     const getSkillDetails = async () => {
-        let result = await fetch('http://127.0.0.1:5000/skills', {
+        let result = await fetch(`${api_url}/skills`, {
             method: 'GET',
             headers: { "Content-Type": "application/json" },
         });
@@ -24,14 +26,17 @@ export default function AutoCompleteSkills({ onSkillSelect }) {
     }));
 
     return (
-        <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={newArray}
-            sx={{ width: 300 }}
-            isOptionEqualToValue={(option, value) => option.skill_id === value.skill_id}
-            onChange={(event, value) => onSkillSelect(value)}
-            renderInput={(params) => <TextField {...params} label="skills" />}
-        />
+        <>
+            <Autocomplete
+                disablePortal
+                id="combo-box-demo"
+                options={newArray}
+                sx={{ width: 300 }}
+                isOptionEqualToValue={(option, value) => option.skill_id === value.skill_id}
+                onChange={(event, value) => setcurrentskill(value)}
+                renderInput={(params) => <TextField {...params} label="skills" />}
+            />
+            <Button onClick={() => onSkillSelect(currentskill)} className='h-10'> add</Button>
+        </>
     );
 }

@@ -1,65 +1,65 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import AutoCompleteSkills from './AutoCompleteSkills';
+import AutoCompletecompetency from './AutoCompletecompetency';
 import { Button, Slider } from '@mui/material';
 
-function CompetencySkills() {
+function Jobrolecompetency() {
     const navigate = useNavigate('')
     const location = useLocation();
     const api_url = process.env.REACT_APP_API_URL
-    const data = location.state?.currentCompetency;
-    const competencyData = location.state?.competency;
-    const [currentCompetency, setcurrentcompetency] = useState(data.competency_id)
+    const data = location.state?.currentjobrole;
+    const jobroleData = location.state?.jobrole;
+    const [currentjobrole, setcurrentjobrole] = useState(data.jobrole_id)
 
-    console.log(competencyData)
+    console.log(jobroleData)
 
-    const [selectedSkills, setSelectedSkills] = useState([]);
+    const [selectedcompetency, setSelectedcompetency] = useState([]);
     console.log(data)
-    const handleAddSkill = (skill) => {
-        if (skill && !selectedSkills.some(s => s.skill_id === skill.skill_id)) {
-            setSelectedSkills([...selectedSkills, { ...skill, weight: 50, competency_id: currentCompetency }]);
+    const handleAddcompetency = (competency) => {
+        if (competency && !selectedcompetency.some(s => s.competency_id === competency.competency_id)) {
+            setSelectedcompetency([...selectedcompetency, { ...competency, weight: 50, jobrole_id: currentjobrole }]);
         }
     };
-    console.log(selectedSkills)
+    console.log(selectedcompetency)
     const handleWeightChange = (index, newWeight) => {
-        const updatedSkills = selectedSkills.map((skill, i) =>
-            i === index ? { ...skill, weight: newWeight } : skill
+        const updatedcompetency = selectedcompetency.map((competency, i) =>
+            i === index ? { ...competency, weight: newWeight } : competency
         );
-        setSelectedSkills(updatedSkills);
+        setSelectedcompetency(updatedcompetency);
     };
     const sendDatatoServer = async () => {
-        await fetch(`${api_url}/comp_skill`, {
+        await fetch(`${api_url}/jobrole_competency`, {
             method: 'post',
             headers: { 'Content-Type': "application/json" },
-            body: JSON.stringify(selectedSkills)
+            body: JSON.stringify(selectedcompetency)
         }).then(res => {
             if (res.ok) {
-                navigate('/competency')
+                navigate('/jobrole')
             }
             else {
                 console.log("error occured")
             }
         })
     }
-    const totalweight = selectedSkills.reduce((sum, skill) => sum + skill.weight, 0)
+    const totalweight = selectedcompetency.reduce((sum, competency) => sum + competency.weight, 0)
 
     useEffect(() => {
-        setSelectedSkills([]);
-    }, [currentCompetency]);
+        setSelectedcompetency([]);
+    }, [currentjobrole]);
 
-    const handleChangeCompetency = (competencyid) => {
+    const handleChangejobrole = (jobroleid) => {
 
-        setcurrentcompetency(competencyid)
+        setcurrentjobrole(jobroleid)
     }
     return (
         <div>
-            <div className='text-center text-xl bold'><h1>{data.competency_name}</h1></div>
+            <div className='text-center text-xl bold'><h1>{data.jobrole_name}</h1></div>
             <div className='flex justify-around'>
                 <div>
-                    <select onChange={(e) => handleChangeCompetency(e.target.value)} value={currentCompetency} className='p-3 border-2 rounded-lg  m-2 text-xl'>
+                    <select onChange={(e) => handleChangejobrole(e.target.value)} value={currentjobrole} className='p-3 border-2 rounded-lg  m-2 text-xl'>
                         {
-                            competencyData.map((item, index) => (
-                                <option key={index} value={item.competency_id}>{item.competency_name}</option>
+                            jobroleData.map((item, index) => (
+                                <option key={index} value={item.jobrole_id}>{item.jobrole_name}</option>
 
                             ))
                         }
@@ -67,29 +67,29 @@ function CompetencySkills() {
                     </select>
                 </div>
                 <div className='flex gap-2'>
-                    <AutoCompleteSkills onSkillSelect={handleAddSkill} />
+                    <AutoCompletecompetency oncompetencyselect={handleAddcompetency} />
                 </div>
             </div>
             <div className="overflow-x-auto m-2">
                 <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
                     <thead className="bg-gray-100">
                         <tr>
-                            <th className="py-3 px-6 text-left text-gray-600 font-semibold">Skill</th>
+                            <th className="py-3 px-6 text-left text-gray-600 font-semibold">competency</th>
 
                             <th className="py-3 px-6 text-left text-gray-600 font-semibold">Adjust Weight</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {selectedSkills.map((skill, index) => (
+                        {selectedcompetency.map((competency, index) => (
                             <tr key={index} className="border-b border-gray-200 hover:bg-gray-50">
-                                <td className="py-3 px-6 text-gray-700">{skill.skill_name}</td>
+                                <td className="py-3 px-6 text-gray-700">{competency.competency_name}</td>
 
                                 <td className="py-3 px-6 text-gray-700">
                                     <div>
-                                        {skill.weight}%
+                                        {competency.weight}%
                                     </div>
                                     <Slider
-                                        value={skill.weight}
+                                        value={competency.weight}
                                         onChange={(e, newValue) => handleWeightChange(index, newValue)}
                                         aria-label="Weight"
                                         valueLabelDisplay="auto"
@@ -116,4 +116,4 @@ function CompetencySkills() {
     );
 }
 
-export default CompetencySkills;
+export default Jobrolecompetency;

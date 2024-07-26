@@ -1,11 +1,15 @@
 import React, { useState } from 'react'
 import './App.css'
-
+import CloseIcon from '@mui/icons-material/Close';
 function AddCandidateModal({ handleclose, setStatus, setRecentformData }) {
     const [message, setmessage] = useState('')
+
+
+    const api_url = process.env.REACT_APP_API_URL
+
     const [formData, setFormData] = useState({
 
-        candidate_id: '',
+
         candidate_name: '',
         candidate_email: '',
         candidate_phon: '',
@@ -27,7 +31,7 @@ function AddCandidateModal({ handleclose, setStatus, setRecentformData }) {
     }
 
     const sendDataToserver = async (formData) => {
-        const res = await fetch('http://127.0.0.1:5000/addcandidate', {
+        const res = await fetch(`${api_url}/addcandidate`, {
             method: 'post',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(formData)
@@ -56,14 +60,13 @@ function AddCandidateModal({ handleclose, setStatus, setRecentformData }) {
     return (
         <div className='modal-overlay'>
             <div className='modal-content '>
-                <div className='flex justify-end'><button onClick={handleclose}>close</button></div>
+                <div className='flex justify-end'><button onClick={handleclose}><CloseIcon /></button></div>
                 <h2 className='text-center text-xl mb-2'> Add Candidate </h2>
                 <form className=' flex flex-col gap-2' onSubmit={handlesubmit}>
-                    <div><label>id:</label> <input type='text' name='candidate_id' placeholder='candidate id' onChange={handleChange} value={formData.candidate_id} /></div>
 
-                    <div><label>name:</label> <input type='text' name='candidate_name' placeholder='candidate name' onChange={handleChange} value={formData.candidate_name} /></div>
-                    <div><label>email:</label> <input type='email' name='candidate_email' placeholder='candidate email' onChange={handleChange} value={formData.candidate_email} /></div>
-                    <div><label>phone no:</label> <input type='text' name='candidate_phon' placeholder='candidate phone number' onChange={handleChange} value={formData.candidate_phone} /></div>
+                    <div className='flex flex-col'><label>name:</label> <input type='text' name='candidate_name' placeholder='candidate name' onChange={handleChange} value={formData.candidate_name} /></div>
+                    <div className='flex flex-col'><label>email:</label> <input type='email' name='candidate_email' placeholder='candidate email' onChange={handleChange} value={formData.candidate_email} /></div>
+                    <div className='flex flex-col'><label>phone no:</label> <input type='text' name='candidate_phon' placeholder='candidate phone number' onChange={handleChange} value={formData.candidate_phone} /></div>
                     <div className='text-yellow-300'>{message}</div>
                     <button type='submit'>Add Candidate</button>
                 </form>
