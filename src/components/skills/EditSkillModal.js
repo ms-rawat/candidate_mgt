@@ -4,7 +4,7 @@ function EditSkillModal({ Data, handleClose, setStatus, setRecenteditFormData })
     const [message, setMessage] = useState('');
     const api_url = process.env.REACT_APP_API_URL
     const [formData, setFormData] = useState({
-
+        skill_id: '',
         skill_name: '',
         skill_description: '',
 
@@ -13,7 +13,7 @@ function EditSkillModal({ Data, handleClose, setStatus, setRecenteditFormData })
     useEffect(() => {
         if (Data) {
             setFormData({
-
+                skill_id: Data.skill_id,
                 skill_name: Data.skill_name,
                 skill_description: Data.skill_description,
 
@@ -35,7 +35,7 @@ function EditSkillModal({ Data, handleClose, setStatus, setRecenteditFormData })
     };
 
     const sendDataToServer = async (formData) => {
-        const res = await fetch(`${api_url}/updateskill`, {
+        const res = await fetch(`${api_url}/skills/update`, {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(formData)
@@ -50,6 +50,7 @@ function EditSkillModal({ Data, handleClose, setStatus, setRecenteditFormData })
             setRecenteditFormData(formData);
             handleClose();
         } else {
+            setMessage(result.message)
             console.log("error while updating");
         }
     };

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
 import CloseIcon from '@mui/icons-material/Close';
+import JobRole from './JobRole';
 function EditSkillModal({ Data, handleClose, setStatus, setRecenteditFormData }) {
     const [message, setMessage] = useState('');
     const api_url = process.env.REACT_APP_API_URL
     const [formData, setFormData] = useState({
-
+        Jobrole_id: '',
         jobrole_name: '',
         jobrole_description: '',
 
@@ -14,7 +15,7 @@ function EditSkillModal({ Data, handleClose, setStatus, setRecenteditFormData })
     useEffect(() => {
         if (Data) {
             setFormData({
-
+                jobrole_id: Data.jobrole_id,
                 jobrole_name: Data.jobrole_name,
                 jobrole_description: Data.jobrole_description,
 
@@ -36,7 +37,7 @@ function EditSkillModal({ Data, handleClose, setStatus, setRecenteditFormData })
     };
 
     const sendDataToServer = async (formData) => {
-        const res = await fetch(`${api_url}/updatejobrole`, {
+        const res = await fetch(`${api_url}/jobroles/update`, {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(formData)

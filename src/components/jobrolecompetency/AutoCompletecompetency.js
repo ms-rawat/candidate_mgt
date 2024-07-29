@@ -8,7 +8,7 @@ export default function AutoCompletecompetency({ oncompetencyselect }) {
     const [currentcompetency, setcurrentcompetency] = useState([])
     const api_url = process.env.REACT_APP_API_URL
     const getcompetencyDetails = async () => {
-        let result = await fetch(`${api_url}/competency`, {
+        let result = await fetch(`${api_url}/competencies/competency`, {
             method: 'GET',
             headers: { "Content-Type": "application/json" },
         });

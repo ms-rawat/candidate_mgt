@@ -55,7 +55,7 @@ function Candidates() {
 
     const handleDelete = async (id) => {
         console.log(id);
-        const res = await fetch(`${api_url}/deletecandidate/${id}`, {
+        const res = await fetch(`${api_url}/candidates/delete/${id}`, {
             method: 'DELETE',
             headers: { 'Content-Type': "application/json" },
         });

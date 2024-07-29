@@ -38,7 +38,7 @@ function Competency() {
     const handleEditClose = () => { setEditOpen(false); setcurrentCandidate(null); }
 
     const getcompetencyDetails = async () => {
-        let result = await fetch(`${api_url}/competency`, {
+        let result = await fetch(`${api_url}/competencies/competency`, {
             method: 'GET',
             headers: { "Content-Type": "application/json" },
         });
@@ -55,7 +55,7 @@ function Competency() {
 
     const handleDelete = async (id) => {
         console.log(id);
-        const res = await fetch(`${api_url}/deletecompetency/${id}`, {
+        const res = await fetch(`${api_url}/competencies/delete/${id}`, {
             method: 'DELETE',
             headers: { 'Content-Type': "application/json" },
         });

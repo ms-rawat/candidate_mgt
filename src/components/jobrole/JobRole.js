@@ -39,7 +39,7 @@ function JobRole() {
     const handleEditClose = () => { setEditOpen(false); setcurrentCandidate(null); }
 
     const getjobroleDetails = async () => {
-        let result = await fetch(`${api_url}/jobrole`, {
+        let result = await fetch(`${api_url}/jobroles`, {
             method: 'GET',
             headers: { "Content-Type": "application/json" },
         });
@@ -56,7 +56,7 @@ function JobRole() {
 
     const handleDelete = async (id) => {
         console.log(id);
-        const res = await fetch(`${api_url}/deletejobrole/${id}`, {
+        const res = await fetch(`${api_url}/jobroles/delete/${id}`, {
             method: 'DELETE',
             headers: { 'Content-Type': "application/json" },
         });

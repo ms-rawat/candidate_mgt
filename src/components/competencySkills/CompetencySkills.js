@@ -28,7 +28,7 @@ function CompetencySkills() {
         setSelectedSkills(updatedSkills);
     };
     const sendDatatoServer = async () => {
-        await fetch(`${api_url}/comp_skill`, {
+        await fetch(`${api_url}/comp_skills`, {
             method: 'post',
             headers: { 'Content-Type': "application/json" },
             body: JSON.stringify(selectedSkills)

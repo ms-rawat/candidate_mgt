@@ -34,7 +34,7 @@ function Questionsetter() {
         });
 
         try {
-            const response = await fetch(`${api_url}/question`, {
+            const response = await fetch(`${api_url}/questions_answers/questions`, {
                 method: 'POST',
                 body: formData,
             });

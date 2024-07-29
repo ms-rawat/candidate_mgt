@@ -58,7 +58,7 @@ function AnswerSetter({ questionType, questionId, onBack }) {
         }
 
         try {
-            const response = await fetch(`${api_url}/answersetter`, {
+            const response = await fetch(`${api_url}/questions_answers/answers`, {
                 method: 'POST',
                 body: formData,
             });

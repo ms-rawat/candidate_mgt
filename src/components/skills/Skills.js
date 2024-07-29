@@ -52,7 +52,7 @@ function Skills() {
 
     const handleDelete = async (id) => {
         console.log(id);
-        const res = await fetch(`${api_url}/deleteskill/${id}`, {
+        const res = await fetch(`${api_url}/skills/delete/${id}`, {
             method: 'DELETE',
             headers: { 'Content-Type': "application/json" },
         });

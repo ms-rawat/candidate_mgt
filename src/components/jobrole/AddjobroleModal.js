@@ -29,7 +29,7 @@ function AddCandidateModal({ handleclose, setStatus, setRecentformData }) {
     }
 
     const sendDataToserver = async (formData) => {
-        const res = await fetch(`${api_url}/addjobrole`, {
+        const res = await fetch(`${api_url}/jobroles/add`, {
             method: 'post',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(formData)

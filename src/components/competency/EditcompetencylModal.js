@@ -4,7 +4,7 @@ function EditcompetencyModal({ Data, handleClose, setStatus, setRecenteditFormDa
     const [message, setMessage] = useState('');
     const api_url = process.env.REACT_APP_API_URL
     const [formData, setFormData] = useState({
-
+        competency_id: '',
         competency_name: '',
         competency_description: '',
 
@@ -13,7 +13,7 @@ function EditcompetencyModal({ Data, handleClose, setStatus, setRecenteditFormDa
     useEffect(() => {
         if (Data) {
             setFormData({
-
+                competency_id: Data.competency_id,
                 competency_name: Data.competency_name,
                 competency_description: Data.competency_description,
 
@@ -35,7 +35,7 @@ function EditcompetencyModal({ Data, handleClose, setStatus, setRecenteditFormDa
     };
 
     const sendDataToServer = async (formData) => {
-        const res = await fetch(`${api_url}/updatecompetency`, {
+        const res = await fetch(`${api_url}/competencies/update`, {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(formData)

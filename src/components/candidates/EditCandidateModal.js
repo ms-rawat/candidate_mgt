@@ -7,7 +7,7 @@ function EditCandidateModal({ Data, handleClose, setStatus, setRecenteditFormDat
     const [message, setMessage] = useState('');
     const api_url = process.env.REACT_APP_API_URL
     const [formData, setFormData] = useState({
-
+        candidate_id: '',
         candidate_name: '',
         candidate_email: '',
         candidate_phone: '',
@@ -16,7 +16,7 @@ function EditCandidateModal({ Data, handleClose, setStatus, setRecenteditFormDat
     useEffect(() => {
         if (Data) {
             setFormData({
-
+                candidate_id: Data.candidate_id,
                 candidate_name: Data.candidate_name,
                 candidate_email: Data.candidate_email,
                 candidate_phone: Data.candidate_phon,
@@ -38,7 +38,7 @@ function EditCandidateModal({ Data, handleClose, setStatus, setRecenteditFormDat
     };
 
     const sendDataToServer = async (formData) => {
-        const res = await fetch(`${api_url}/updatecandidate`, {
+        const res = await fetch(`${api_url}/candidates/update`, {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(formData)
