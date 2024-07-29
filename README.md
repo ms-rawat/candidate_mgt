@@ -17,7 +17,9 @@ This project is a React-based frontend application using Yarn for package manage
 
 Before you begin, ensure you have met the following requirements:
 
-- **Node.js**: Download and install Node.js from [here](https://nodejs.org/). The LTS version is recommended.
+- **Node.js** Installation
+follow this website for detailed installation guide of node js
+[link](https://phoenixnap.com/kb/install-node-js-npm-on-windows)
 - **Yarn**: Install Yarn globally using the following command:
   ```sh
   npm install -g yarn
