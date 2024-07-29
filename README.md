@@ -21,16 +21,31 @@ Before you begin, ensure you have met the following requirements:
 - **Yarn**: Install Yarn globally using the following command:
   ```sh
   npm install -g yarn
-
+- Clone the repository:
 git clone https://github.com/ms-rawat/https://github.com/ms-rawat/candidate_mgt
 
+
+- Navigate to the project directory
+```sh
 cd your-repository-name
+```
 
+- installing the yarn globally
+```sh
 npm install -g yarn
+```
 
+
+Install dependencies:
+
+```sh
 yarn add
+```
 
 start the project 
 
+```sh
+
 yarn start
+```
 
