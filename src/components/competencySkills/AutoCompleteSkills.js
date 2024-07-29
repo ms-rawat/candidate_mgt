@@ -26,7 +26,9 @@ export default function AutoCompleteSkills({ onSkillSelect }) {
     }));
 
     return (
-        <>
+        <div className='flex  gap-2'>
+
+
             <Autocomplete
                 disablePortal
                 id="combo-box-demo"
@@ -36,7 +38,7 @@ export default function AutoCompleteSkills({ onSkillSelect }) {
                 onChange={(event, value) => setcurrentskill(value)}
                 renderInput={(params) => <TextField {...params} label="skills" />}
             />
-            <Button onClick={() => onSkillSelect(currentskill)} className='h-10'> add</Button>
-        </>
+            <Button className='h-3/4 ' variant='contained' onClick={() => onSkillSelect(currentskill)} > add</Button>
+        </div>
     );
 }

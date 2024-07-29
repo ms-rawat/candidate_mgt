@@ -53,10 +53,11 @@ function CompetencySkills() {
     }
     return (
         <div>
-            <div className='text-center text-xl bold'><h1>{data.competency_name}</h1></div>
-            <div className='flex justify-around'>
-                <div>
-                    <select onChange={(e) => handleChangeCompetency(e.target.value)} value={currentCompetency} className='p-3 border-2 rounded-lg  m-2 text-xl'>
+
+            <div className='flex justify-around mt-10 gap-4 border p-2 mx-2'>
+                <div >
+                    <label className='mr-2'>coompetency</label>
+                    <select onChange={(e) => handleChangeCompetency(e.target.value)} value={currentCompetency} className='p-3 border-2 rounded-lg  mr-2 text-xl'>
                         {
                             competencyData.map((item, index) => (
                                 <option key={index} value={item.competency_id}>{item.competency_name}</option>
@@ -66,7 +67,8 @@ function CompetencySkills() {
 
                     </select>
                 </div>
-                <div className='flex gap-2'>
+                <div className='flex'>
+                    <label className='mt-4 mr-2'>skills</label>
                     <AutoCompleteSkills onSkillSelect={handleAddSkill} />
                 </div>
             </div>

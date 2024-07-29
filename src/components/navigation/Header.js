@@ -13,7 +13,8 @@ function Header() {
         { path: "/", componentName: "Candidates" },
         { path: "/skills", componentName: "Skills" },
         { path: "/competency", componentName: "Competency" },
-        { path: "/jobrole", componentName: "JobRole" }
+        { path: "/jobrole", componentName: "JobRole" },
+        { path: "/questionsetter", componentName: "QuestionSetter" }
     ];
 
     const DrawerList = (

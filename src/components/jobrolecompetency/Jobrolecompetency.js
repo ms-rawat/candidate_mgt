@@ -53,9 +53,9 @@ function Jobrolecompetency() {
     }
     return (
         <div>
-            <div className='text-center text-xl bold'><h1>{data.jobrole_name}</h1></div>
-            <div className='flex justify-around'>
+            <div className='flex justify-around mt-10 gap-4 border p-2 mx-2'>
                 <div>
+                    <label className='mr-2'>jobrole</label>
                     <select onChange={(e) => handleChangejobrole(e.target.value)} value={currentjobrole} className='p-3 border-2 rounded-lg  m-2 text-xl'>
                         {
                             jobroleData.map((item, index) => (
@@ -67,6 +67,7 @@ function Jobrolecompetency() {
                     </select>
                 </div>
                 <div className='flex gap-2'>
+                    <label className='mr-2 mt-4'>competency</label>
                     <AutoCompletecompetency oncompetencyselect={handleAddcompetency} />
                 </div>
             </div>

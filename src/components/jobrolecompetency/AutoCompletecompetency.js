@@ -36,7 +36,7 @@ export default function AutoCompletecompetency({ oncompetencyselect }) {
                 onChange={(event, value) => setcurrentcompetency(value)}
                 renderInput={(params) => <TextField {...params} label="competency" />}
             />
-            <Button onClick={() => oncompetencyselect(currentcompetency)} className='h-10'> add</Button>
+            <Button variant='contained' onClick={() => oncompetencyselect(currentcompetency)} className='h-10'> add</Button>
         </>
     );
 }
