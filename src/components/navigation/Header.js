@@ -14,7 +14,9 @@ function Header() {
         { path: "/skills", componentName: "Skills" },
         { path: "/competency", componentName: "Competency" },
         { path: "/jobrole", componentName: "JobRole" },
-        { path: "/questionsetter", componentName: "QuestionSetter" }
+        { path: "/questionsetter", componentName: "QuestionSetter" },
+        { path: "/show_questions", componentName: "show Questions" },
+        { path: "/createAsssessment", componentName: "create Assessment" }
     ];
 
     const DrawerList = (

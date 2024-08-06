@@ -8,6 +8,7 @@ import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import DeleteConfirmation from '../reusableComp/Deletecomfirmation';
 function JobRole() {
     const [jobrole, setjobroleData] = useState([]);
     const [open, setopen] = useState(false);
@@ -98,7 +99,7 @@ function JobRole() {
 
     return (
         <div className="container mx-auto py-8">
-            <h1 className="text-center text-2xl font-bold mb-8">jobrole</h1>
+            <h1 className='text-center font-serif text-xl m-4'>Jobroles</h1>
             <div className="flex justify-between items-center mb-6">
                 <div className="flex items-center space-x-2">
                     <input
@@ -137,22 +138,20 @@ function JobRole() {
                                 <td className="border p-2">{jobrole.jobrole_name}</td>
                                 <td className="border p-2">{jobrole.jobrole_description}</td>
                                 <td className="border p-2">
-                                    <button
-                                        onClick={() => handleDelete(jobrole.jobrole_id)}
-                                        className="text-bg-gray-800 border-none  p-1 rounded-lg mr-2"
-                                        title='delete'
-                                    >
-                                        <DeleteIcon />
-                                    </button>
-                                    <button
-                                        onClick={() => handleEditOpen(jobrole, index)}
-                                        className=" text-bg-gray-800 border-none  p-1 rounded-lg mr-2"
-                                    >
-                                        <EditIcon />
-                                    </button>
-                                    <Button variant='contained'
-                                        onClick={() => Openjobrolecompetency(jobrole)}
-                                    >manage competency</Button>
+                                    <div className='flex justify-around'>
+                                        <DeleteConfirmation handleDelete={() => handleDelete(jobrole.jobrole_id)} />
+
+
+                                        <button
+                                            onClick={() => handleEditOpen(jobrole, index)}
+                                            className=" text-bg-gray-800 border-none  p-1 rounded-lg mr-2"
+                                        >
+                                            <EditIcon />
+                                        </button>
+                                        <Button variant='contained'
+                                            onClick={() => Openjobrolecompetency(jobrole)}
+                                        >manage competency</Button>
+                                    </div>
                                 </td>
                             </tr>
                         ))}

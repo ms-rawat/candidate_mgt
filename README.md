@@ -2,16 +2,7 @@
 
 This project is a React-based frontend application using Yarn for package management.
 
-## Table of Contents
 
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Running the Project](#running-the-project)
-- [Building the Project](#building-the-project)
-- [Deploying the Project](#deploying-the-project)
-- [Folder Structure](#folder-structure)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Prerequisites
 
@@ -25,7 +16,7 @@ follow this website for detailed installation guide of node js
   npm install -g yarn
 - Clone the repository:
 git clone https://github.com/ms-rawat/https://github.com/ms-rawat/candidate_mgt
-
+or downlod the repositary and unzipt in desired location.
 
 - Navigate to the project directory
 ```sh

@@ -12,6 +12,8 @@ import CompetencySkills from './components/competencySkills/CompetencySkills';
 import Header from './components/navigation/Header';
 import Jobrolecompetency from './components/jobrolecompetency/Jobrolecompetency';
 import Questionsetter from './components/question/Questionsetter';
+import Showquestions from './components/question/Showquestions';
+import CreateAssessment from './components/assessment/CreateAssessment';
 
 
 function App() {
@@ -43,6 +45,14 @@ function App() {
     {
       path: 'questionsetter',
       element: <Questionsetter />
+    },
+    {
+      path: 'previewQuestion',
+      element: <Showquestions />
+    },
+    {
+      path: 'createAsssessment',
+      element: <CreateAssessment />
     }
   ])
 

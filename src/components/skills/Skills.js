@@ -6,6 +6,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
+import DeleteConfirmation from '../reusableComp/Deletecomfirmation';
 function Skills() {
     const [skills, setSkillsData] = useState([]);
     const [open, setopen] = useState(false);
@@ -88,7 +89,7 @@ function Skills() {
 
     return (
         <div className="container mx-auto py-8">
-            <h1 className="text-center text-2xl font-bold mb-8">skills</h1>
+            <h1 className='text-center font-serif text-xl m-4'> Skill </h1>
             <div className="flex justify-between items-center mb-6">
                 <div className="flex items-center space-x-2">
                     <input
@@ -127,18 +128,17 @@ function Skills() {
                                 <td className="border p-2">{skills.skill_name}</td>
                                 <td className="border p-2">{skills.skill_description}</td>
                                 <td className="border p-2">
-                                    <button
-                                        onClick={() => handleDelete(skills.skill_id)}
-                                        className="text-bg-gray-800 border-none  p-1 rounded-lg mr-2"
-                                    >
-                                        <DeleteIcon />
-                                    </button>
-                                    <button
-                                        onClick={() => handleEditOpen(skills, index)}
-                                        className="text-bg-gray-800 border-none  p-1 rounded-lg mr-2"
-                                    >
-                                        <EditIcon />
-                                    </button>
+                                    <div className='flex justify-around'>
+                                        <DeleteConfirmation handleDelete={() => handleDelete(skills.skill_id)} />
+
+
+                                        <button
+                                            onClick={() => handleEditOpen(skills, index)}
+                                            className="text-bg-gray-800 border-none  p-1 rounded-lg mr-2"
+                                        >
+                                            <EditIcon />
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         ))}

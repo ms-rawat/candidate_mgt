@@ -54,6 +54,9 @@ function CompetencySkills() {
     return (
         <div>
 
+            <h1 className='text-center font-serif text-xl m-4'>Manage Skill with competencies</h1>
+
+
             <div className='flex justify-around mt-10 gap-4 border p-2 mx-2'>
                 <div >
                     <label className='mr-2'>coompetency</label>

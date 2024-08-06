@@ -8,6 +8,7 @@ import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
+import DeleteConfirmation from '../reusableComp/Deletecomfirmation';
 function Competency() {
     const [competency, setcompetencyData] = useState([]);
     const [open, setopen] = useState(false);
@@ -95,7 +96,7 @@ function Competency() {
 
     return (
         <div className="container mx-auto py-8">
-            <h1 className="text-center text-2xl font-bold mb-8">competency</h1>
+            <h1 className='text-center font-serif text-xl m-4'>Competencies</h1>
             <div className="flex justify-between items-center mb-6">
                 <div className="flex items-center space-x-2">
                     <input
@@ -134,19 +135,17 @@ function Competency() {
                                 <td className="border p-2">{competency.competency_name}</td>
                                 <td className="border p-2">{competency.competency_description}</td>
                                 <td className="border p-2">
-                                    <div className='flex gap-1'>
-                                        <button
-                                            onClick={() => handleDelete(competency.competency_id)}
-                                            className="text-bg-gray-800 border-none  p-1 rounded-lg mr-2"
-                                        >
-                                            <DeleteIcon />
-                                        </button>
+
+                                    <div className='flex justify-around'>
+                                        <DeleteConfirmation handleDelete={() => handleDelete(competency.competency_id)} />
+
                                         <button
                                             onClick={() => handleEditOpen(competency, index)}
                                             className="text-bg-gray-800 border-none  p-1 rounded-lg mr-2"
                                         >
                                             <EditIcon />
                                         </button>
+
                                         <Button
                                             onClick={() => OpenCompetencyskills(competency)}
                                             variant='contained'
@@ -154,6 +153,7 @@ function Competency() {
                                             manage skills
                                         </Button>
                                     </div>
+
                                 </td>
                             </tr>
                         ))}
